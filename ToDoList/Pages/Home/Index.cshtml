@@ -1,0 +1,32 @@
+﻿@model ICollection<ToDoList.Models.Goal>
+
+<h1>@ViewBag.Title</h1>
+
+<p>First page</p>
+
+@if (Model != null )
+{
+    foreach (var goal in Model)
+    {
+        <p>
+            <div class ="w3-card">
+                <div class="w3-container">
+                    <p>@goal.Description</p>
+                    <p><a asp-controller="goal" asp-action="index" asp-route-id="@goal.Id">More...</a></p>
+                </div>
+                <footer class="w3-container w3-blue">
+                    <h5>
+                        @goal.CreationDate.ToShortDateString()
+                        @if(@goal.Tags != null)
+                        {
+                            @foreach (var tag in @goal.Tags)
+                                @(tag.Name + " ")
+                        }
+                    </h5>
+
+                </footer>
+
+            </div>
+        </p>
+    }
+}
